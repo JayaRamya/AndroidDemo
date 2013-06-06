@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Abhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Abhan">
+    <link href="stylesheets/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="stylesheets/app.css" rel="stylesheet">
+    <link href="stylesheets/app-theme.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300italic,100,100italic,300" rel="stylesheet" type="text/css">
+  </head>
+  <body data-target=".content-nav">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <h1>GlobalViewHead</h1>
+          </div>
+          <div class="span7">
+            <menu>
+              <ul>
+                <li><a href="https://github.com/Abhan" data-title="GitHub Project" class="menu github"><img src="images/icon-github.png" alt="GitHub"/></a></li>
+              </ul>
+            </menu>
+          </div>
+      </div>
+    </header>
+    <section id="body">
+      <div class="container">
+        <div class="row">
+          <div class="span9">
+            <h3 id="introduction">Introduction</h3>
+            <p>Facebook recently released a new feature in Messenger called <code>Chat Head</code>. It is generally used to notify user using a view which tops among all opened application and provide latest information to the user.</p>
+
+            <h3 id="features">Features</h3>
+  		<p>It is simple, just add a view to <code>Window</code>. As we all know that - Activity, Dialogs have their own <code>Window</code> instance. Same as that Services can have their own <code>Window</code> instance.
+</p>
+			<p>To show <code>Window</code> on top of all other applications, we need to provide <code>uses-permission</code> in manifest.</p>
+			<p><pre>android:name = "android.permission.SYSTEM_ALERT_WINDOW"</pre></p>
+
+			<h4 id="snippet"><i><b>Snippet</b></i></h4>
+			<p>First of all create a <code>Service</code> like as below.</p>
+			<pre> public class AbhanService extends Service { 
+	private WindowManager windowManager;
+	private ImageView globalView;	
+	...
+				
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+		...
+	}
+} </pre>
+			<p>Now define a view which you want to show as <code>Chat Head</code>. As in this demo, <code>ImageView</code> is used. In <code>onCreate</code> method </p>
+			<pre> globalView = new ImageView(this);
+ globalView.setImageResource(R.drawable.ic_launcher);</pre>
+			<p>Now define <code>LayoutParams</code> to add view in <code>Window</code>  </p>
+			<pre> WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, 
+			WindowManager.LayoutParams.WRAP_CONTENT, 
+			WindowManager.LayoutParams.TYPE_PHONE, 
+			WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, 
+			PixelFormat.TRANSLUCENT); </pre>
+			<p>Here flag <code>FLAG_NOT_FOCUSABLE</code> is used to avoid key input focus from user and flag <code>TYPE_PHONE</code> is used to provide user interaction with the phone (in particular incoming calls).</p>
+			<pre>params.gravity = Gravity.TOP | Gravity.LEFT; 
+params.x = 0; 
+params.y = 0; </pre>
+			<p>Above code is used to define position of <code>Chat Head</code> in <code>Window</code>.</p>
+			<p>Add <code>Chat Head</code> in <code>Window</code></p>
+			<pre>windowManager.addView(globalView, params);</pre>
+			<p>To move <code>Chat Head</code> anywhere in the Screen, you need to set <code>OnTouchListener</code>.</p>
+			<pre>globalView.setOnTouchListener(new View.OnTouchListener() {
+	@Override
+	public boolean onTouch(View view, MotionEvent event) {
+		switch(event.getAction()) {
+			case MotionEvent.ACTION_DOWN:
+				inDragMode = true;
+				initX = params.x;
+				initY = params.y;
+				initViewX = Math.abs((int) event.getRawX() - ((ImageView) view).getLeft());
+				initViewY = Math.abs((int) event.getRawY() - ((ImageView) view).getTop());
+			case MotionEvent.ACTION_UP:
+				inDragMode = false;
+			case MotionEvent.ACTION_MOVE:
+				if(! inDragMode) {
+					newX = initX + (int) event.getRawX() - initViewX;
+					newY = initY + (int) event.getRawY() - initViewY;
+					if((newX <= 0 || newX >= screenWidth) || (newY <= 0 || newY >= screenHight)) {
+						inDragMode = false;
+					} else {
+						params.x = newX;
+						params.y = newY;
+						updateViews(globalView, params);
+					}
+				}
+			}
+			return true;
+		}
+	});</pre>
+			<h4 id="download"><i><b>Download</b></i></h4>
+			<p> Full Source is available from <a href="https://github.com/Abhan/AndroidDemo/tree/master/GlobalViewHead">Here</a>.</p> 
+			<h3 id="license">License</h3>
+            <pre>Copyright 2013 Abhan.
+			
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+   
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+          </div>
+          <div class="span3">
+            <div class="content-nav" data-spy="affix" data-offset-top="80">
+              <ul class="nav nav-tabs nav-stacked primary">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#features">Features</a></li>
+				<li><a href="#snippet">Snippet</a></li>
+				<li><a href="#download">Download</a></li>
+                <li><a href="#license">License</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/jquery.smooth-scroll.min.js"></script>
+    <script src="javascripts/jquery-maven-artifact.min.js"></script>
+    <script src="javascripts/prettify.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        prettyPrint();
+
+        $('body').scrollspy();
+        
+        $('a').smoothScroll();
+
+        $('.menu').tooltip({
+          placement: 'bottom',
+          trigger: 'hover',
+          container: 'body',
+          delay: {
+            show: 500,
+            hide: 0
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
