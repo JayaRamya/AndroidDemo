@@ -1,9 +1,9 @@
 header, #subtitle, a.dl {
-  background-color: #194775;
+  background-color: #005473;
 }
 
 .content-nav li.active a, .content-nav li.active a:hover {
-  border-left-color: #194775;
+  border-left-color: #005473;
 }
 
 header menu li a:hover, a.dl:hover {
@@ -11,7 +11,7 @@ header menu li a:hover, a.dl:hover {
 }
 
 a {
-  color: #194775;
+  color: #005473;
 }
 
 a:hover {
