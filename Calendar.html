@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Abhan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Abhan">
+    <link href="stylesheets/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="stylesheets/app.css" rel="stylesheet">
+    <link href="stylesheets/app-theme-calendar.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300italic,100,100italic,300" rel="stylesheet" type="text/css">
+  </head>
+  <body data-target=".content-nav">
+    <header>
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <h1>Simple Calendar</h1>
+          </div>
+          <div class="span7">
+            <menu>
+              <ul>
+                <li><a href="https://github.com/Abhan" data-title="GitHub Project" class="menu github"><img src="images/icon-github.png" alt="GitHub"/></a></li>
+              </ul>
+            </menu>
+          </div>
+      </div>
+    </header>
+    <section id="body">
+      <div class="container">
+        <div class="row">
+          <div class="span9">
+            <h3 id="introduction">Introduction</h3>
+            <p>This project is just a try to provide overview of <code>Calendar</code>. I tried to include allmost five types of color styles with each having different <code>Background</code>, <code>Current Day</code>, <code>Selected Day</code>, and <code>Event Marker</code>.</p>
+			<p>As currently, I did not provide support for <code>Event</code> creation but I have included functionality for that.</p>
+
+            <h3 id="features">Features</h3>
+			<p>Rather than using <code>Background Image</code>, in this project, I tried to use <code>GradientDrawable</code>. In this demo, I have included <code>Red</code>, <code>Blue</code>, <code>Black</code>, <code>Green</code>, and <code>Orange</code> colors for integrated styles.</p>
+
+			<h4 id="snippet">Snippet</h4>
+			<p>First of all create a <code>Activity</code> like as below.</p>
+			<pre> public class CalendarActivity extends Activity {
+	private RelativeLayout parentLayout = null; 
+	private GridView gridView = null;
+	private CalendarAdapter adapter = null;
+	private String themeName = "black";	
+	...
+				
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		themeName = "green";
+		...
+	}
+} </pre>
+			<p>Now set background, arrow images, text color according to set theme as below.</p>
+			<pre> parentBackgroundColor = new GradientDrawable(
+	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFFEEF8F4, 0xFFDCD4B8 });
+	gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, 
+		new int[] {0xFFE96866, 0xFFBD0400 });
+	gradientDrawable.setCornerRadius(0f);
+	gradientDrawable.setDither(true);
+	leftArrowDrawable = getResources().getDrawable(R.drawable.left_red);
+	rightArrowDrawable = getResources().getDrawable(R.drawable.right_red);
+	calendarTitleColor = Color.parseColor("#980000");
+	sundayColor = Color.parseColor("#E30000");
+	restdaysColor = Color.parseColor("#8C3C01");
+	parentGridBackgroundColor = Color.parseColor("#EEF8F4");
+	currentMonthDateColor = Color.parseColor("#67351D");
+	prevNextMonthDateColor = Color.parseColor("#BF8E76");
+	smallCircle = getResources().getDrawable(R.drawable.select_common);
+	dateClickedBackgroundColor = new GradientDrawable(
+			GradientDrawable.Orientation.TOP_BOTTOM, new int[] {
+			0xFF753B15, 0xFF2C0D0A });</pre>
+			<p>Now get <code>Calendar</code> instance and set current date, month, and year.</p>
+			<pre>calMonth = Calendar.getInstance();
+calMonth.set(calMonth.get(Calendar.YEAR), calMonth.get(Calendar.MONTH),
+	calMonth.get(Calendar.DATE)); </pre>
+			<p>Now initialize <code>Adapter</code> with current set <code>Calendar</code> instance.</p>
+			<pre>adapter = new CalendarAdapter(CalendarActivity.this, calMonth,
+	parentGridBackgroundColor, currentMonthDateColor,
+	prevNextMonthDateColor, smallCircle,
+	dateClickedBackgroundColor, calendarTitleColor, restdaysColor,
+	sundayColor);</pre>
+			<p>Create a method which refresh view according to selected month and year.</p>
+			<pre>	public void refreshDays() {
+		lastClicked = -1;
+		days = null;
+		firstDay = (short) month.get(Calendar.DAY_OF_WEEK);
+		if (firstDay == 7) {
+			days = new String[42];
+		} else {
+			days = new String[35];
+		}
+		short j = FIRST_DAY_OF_WEEK;
+
+		if (firstDay > 1) {
+			Calendar calendar = Calendar.getInstance();
+			if (month.get(Calendar.MONTH) == Calendar.JANUARY) {
+				calendar.set(month.get(Calendar.YEAR) - 1, Calendar.DECEMBER, 1);
+			} else {
+				calendar.set(month.get(Calendar.YEAR),
+						month.get(Calendar.MONTH) - 1, 1);
+			}
+			short length = 0;
+
+			for (j = 0; j < firstDay - FIRST_DAY_OF_WEEK; j++) {
+				days[j] = "";
+				length = j;
+			}
+
+			short maxDayPrevious = (short) calendar
+					.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+			for (int i = length - 1; i >= 0; i--) {
+				days[i] = String.valueOf(maxDayPrevious);
+				maxDayPrevious--;
+			}
+		} else {
+			for (j = 0; j < FIRST_DAY_OF_WEEK * 6; j++) {
+				days[j] = "";
+			}
+			j = FIRST_DAY_OF_WEEK * 6 + 1;
+		}
+
+		short dayNumber = 1, startDay = 1;
+		maxday = (short) month.getActualMaximum(Calendar.DAY_OF_MONTH);
+		for (short i = (short) (j - 1); i < days.length; i++) {
+			if (dayNumber <= maxday) {
+				days[i] = "" + dayNumber;
+				dayNumber++;
+			} else {
+				days[i] = "" + startDay;
+				startDay++;
+			}
+		}
+	}</pre>
+			<p>To move next or previous month, you can use <code>Left</code> or <code>Right</code> arrow.</p>
+			
+			<h3 id="screenshots">Screen Shots</h3>
+			<p> Coming Soon.</p>
+			
+			<h3 id="download">Download</h3>
+			<p> Full Source is available from <a href="https://github.com/Abhan/AndroidDemo/tree/master/CalendarDemo">Here</a>.</p> 
+			
+			<h3 id="license">License</h3>
+            <pre>Copyright 2013.
+			
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+   
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+          </div>
+          <div class="span3">
+            <div class="content-nav" data-spy="affix" data-offset-top="80">
+              <ul class="nav nav-tabs nav-stacked primary">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#features">Features</a></li>
+				<li><a href="#snippet">Snippet</a></li>
+				<li><a href="#screenshots">Screen Shots</a></li>
+				<li><a href="#download">Download</a></li>
+                <li><a href="#license">License</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/jquery.smooth-scroll.min.js"></script>
+    <script src="javascripts/jquery-maven-artifact.min.js"></script>
+    <script src="javascripts/prettify.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        prettyPrint();
+
+        $('body').scrollspy();
+        
+        $('a').smoothScroll();
+
+        $('.menu').tooltip({
+          placement: 'bottom',
+          trigger: 'hover',
+          container: 'body',
+          delay: {
+            show: 500,
+            hide: 0
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

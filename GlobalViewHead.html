@@ -7,7 +7,7 @@
     <meta name="description" content="Abhan">
     <link href="stylesheets/bootstrap-combined.min.css" rel="stylesheet">
     <link href="stylesheets/app.css" rel="stylesheet">
-    <link href="stylesheets/app-theme.css" rel="stylesheet">
+    <link href="stylesheets/app-theme-globalviewhead.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,300italic,100,100italic,300" rel="stylesheet" type="text/css">
   </head>
   <body data-target=".content-nav">
@@ -39,7 +39,7 @@
 			<p>To show <code>Window</code> on top of all other applications, we need to provide <code>uses-permission</code> in manifest.</p>
 			<p><pre>android:name = "android.permission.SYSTEM_ALERT_WINDOW"</pre></p>
 
-			<h4 id="snippet"><i><b>Snippet</b></i></h4>
+			<h4 id="snippet">Snippet</h4>
 			<p>First of all create a <code>Service</code> like as below.</p>
 			<pre> public class AbhanService extends Service { 
 	private WindowManager windowManager;
@@ -53,15 +53,15 @@
 		...
 	}
 } </pre>
-			<p>Now define a view which you want to show as <code>Chat Head</code>. As in this demo, <code>ImageView</code> is used. In <code>onCreate</code> method </p>
+			<p>Now define a view which you want to show as <code>Chat Head</code>, as in this demo, <code>ImageView</code> is used. In <code>onCreate</code> method define your view.</p>
 			<pre> globalView = new ImageView(this);
  globalView.setImageResource(R.drawable.ic_launcher);</pre>
 			<p>Now define <code>LayoutParams</code> to add view in <code>Window</code>  </p>
 			<pre> WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.WRAP_CONTENT, 
-			WindowManager.LayoutParams.WRAP_CONTENT, 
-			WindowManager.LayoutParams.TYPE_PHONE, 
-			WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, 
-			PixelFormat.TRANSLUCENT); </pre>
+	WindowManager.LayoutParams.WRAP_CONTENT, 
+	WindowManager.LayoutParams.TYPE_PHONE, 
+	WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, 
+	PixelFormat.TRANSLUCENT); </pre>
 			<p>Here flag <code>FLAG_NOT_FOCUSABLE</code> is used to avoid key input focus from user and flag <code>TYPE_PHONE</code> is used to provide user interaction with the phone (in particular incoming calls).</p>
 			<pre>params.gravity = Gravity.TOP | Gravity.LEFT; 
 params.x = 0; 
@@ -98,10 +98,10 @@ params.y = 0; </pre>
 			return true;
 		}
 	});</pre>
-			<h4 id="screenshots"><i><b>Screen Shots</b></i></h4>
+			<h3 id="screenshots">Screen Shots</h3>
 			<p> Coming Soon.</p>
 			
-			<h4 id="download"><i><b>Download</b></i></h4>
+			<h3 id="download">Download</h3>
 			<p> Full Source is available from <a href="https://github.com/Abhan/AndroidDemo/tree/master/GlobalViewHead">Here</a>.</p> 
 			
 			<h3 id="license">License</h3>
