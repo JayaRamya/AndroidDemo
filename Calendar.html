@@ -20,7 +20,7 @@
           <div class="span7">
             <menu>
               <ul>
-                <li><a href="https://github.com/Abhan" data-title="GitHub Project" class="menu github"><img src="images/icon-github.png" alt="GitHub"/></a></li>
+                <li><a href="https://github.com/Abhan/AndroidDemo/tree/master/CalendarDemo" data-title="GitHub Project" class="menu github"><img src="images/icon-github.png" alt="GitHub"/></a></li>
               </ul>
             </menu>
           </div>
@@ -34,10 +34,8 @@
             <p>This project is just a try to provide overview of <code>Calendar</code>. I tried to include almost five types of color styles with each having different <code>Background</code>, <code>Current Day</code>, <code>Selected Day</code>, and <code>Event Marker</code>.</p>
 			<p>As currently, I did not provide support for <code>Event</code> creation but I have included functionality for that.</p>
 
-            <h3 id="features">Features</h3>
+            <h3 id="codesnippet">Code Snippet</h3>
 			<p>Rather than using <code>Background Image</code>, in this project, I tried to use <code>GradientDrawable</code>. In this demo, I have included <code>Red</code>, <code>Blue</code>, <code>Black</code>, <code>Green</code>, and <code>Orange</code> colors for integrated styles.</p>
-
-			<h4 id="snippet">Snippet</h4>
 			<p>First of all create a <code>Activity</code> like as below.</p>
 			<pre> public class CalendarActivity extends Activity {
 	private RelativeLayout parentLayout = null; 
@@ -54,24 +52,23 @@
 	}
 } </pre>
 			<p>Now set background, arrow images, text color according to set theme as below.</p>
-			<pre> parentBackgroundColor = new GradientDrawable(
-	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFFEEF8F4, 0xFFDCD4B8 });
-	gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, 
+			<pre>parentBackgroundColor = new GradientDrawable(
+	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFFEEF8F4, 0xFFDCD4B8});
+gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, 
 		new int[] {0xFFE96866, 0xFFBD0400 });
-	gradientDrawable.setCornerRadius(0f);
-	gradientDrawable.setDither(true);
-	leftArrowDrawable = getResources().getDrawable(R.drawable.left_red);
-	rightArrowDrawable = getResources().getDrawable(R.drawable.right_red);
-	calendarTitleColor = Color.parseColor("#980000");
-	sundayColor = Color.parseColor("#E30000");
-	restdaysColor = Color.parseColor("#8C3C01");
-	parentGridBackgroundColor = Color.parseColor("#EEF8F4");
-	currentMonthDateColor = Color.parseColor("#67351D");
-	prevNextMonthDateColor = Color.parseColor("#BF8E76");
-	smallCircle = getResources().getDrawable(R.drawable.select_common);
-	dateClickedBackgroundColor = new GradientDrawable(
-			GradientDrawable.Orientation.TOP_BOTTOM, new int[] {
-			0xFF753B15, 0xFF2C0D0A });</pre>
+gradientDrawable.setCornerRadius(0f);
+gradientDrawable.setDither(true);
+leftArrowDrawable = getResources().getDrawable(R.drawable.left_red);
+rightArrowDrawable = getResources().getDrawable(R.drawable.right_red);
+calendarTitleColor = Color.parseColor("#980000");
+sundayColor = Color.parseColor("#E30000");
+restdaysColor = Color.parseColor("#8C3C01");
+parentGridBackgroundColor = Color.parseColor("#EEF8F4");
+currentMonthDateColor = Color.parseColor("#67351D");
+prevNextMonthDateColor = Color.parseColor("#BF8E76");
+smallCircle = getResources().getDrawable(R.drawable.select_common);
+dateClickedBackgroundColor = new GradientDrawable(
+	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFF753B15, 0xFF2C0D0A});</pre>
 			<p>Now get <code>Calendar</code> instance and set current date, month, and year.</p>
 			<pre>calMonth = Calendar.getInstance();
 calMonth.set(calMonth.get(Calendar.YEAR), calMonth.get(Calendar.MONTH),
@@ -162,8 +159,7 @@ limitations under the License.</pre>
             <div class="content-nav" data-spy="affix" data-offset-top="80">
               <ul class="nav nav-tabs nav-stacked primary">
                 <li><a href="#introduction">Introduction</a></li>
-                <li><a href="#features">Features</a></li>
-				<li><a href="#snippet">Snippet</a></li>
+                <li><a href="#codesnippet">Code Snippet</a></li>
 				<li><a href="#screenshots">Screen Shots</a></li>
 				<li><a href="#download">Download</a></li>
                 <li><a href="#license">License</a></li>
