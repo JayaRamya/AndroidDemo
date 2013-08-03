@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/gray"
+	android:orientation="vertical" >
+	<RadioGroup
+		android:id="@+id/monthsGrp"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="10dp"
+		android:background="@android:color/white"
+		android:checkedButton="@+id/threeMonths"
+		android:divider="@android:color/darker_gray"
+		android:gravity="center_vertical"
+		android:orientation="vertical"
+		android:showDividers="none" >
+		<RadioButton
+			android:id="@+id/threeMonths"
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"
+			android:button="@null"
+			android:drawablePadding="0dp"
+			android:drawableRight="@drawable/btn_radio_holo_light"
+			android:gravity="left|center_vertical"
+			android:paddingLeft="5dp"
+			android:singleLine="true"
+			android:text="@string/three_months"
+			android:textColor="@color/darkslate"
+			android:textStyle="normal" />
+		<RadioButton
+			android:id="@+id/sixMonths"
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"
+			android:button="@null"
+			android:drawablePadding="0dp"
+			android:drawableRight="@drawable/btn_radio_holo_light"
+			android:gravity="left|center_vertical"
+			android:paddingLeft="5dp"
+			android:singleLine="true"
+			android:text="@string/six_months"
+			android:textColor="@color/darkslate"
+			android:textStyle="normal" />
+	</RadioGroup>
+	<View
+		android:layout_width="fill_parent"
+		android:layout_height="10dp"
+		android:background="@null" />
+	<ListView
+		android:id="@+id/list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="10dp"
+		android:background="@android:color/white"
+		android:cacheColorHint="@android:color/transparent"
+		android:choiceMode="singleChoice"
+		android:descendantFocusability="beforeDescendants"
+		android:divider="@android:color/black"
+		android:dividerHeight="0dp"
+		android:fadingEdge="none"
+		android:listSelector="@android:color/transparent"
+		android:scrollbars="none"
+		android:smoothScrollbar="true" />
+</LinearLayout>
