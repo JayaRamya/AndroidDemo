@@ -43,31 +43,31 @@ public class LeftFragment extends Fragment {
 		designationList.clear();
 
 		Abhan abhan = new Abhan();
-		abhan.setName("Krutik");
+		abhan.setName("A");
 		abhan.setAge(25);
 		abhan.setDesignation("Developer");
-		abhan.setCompany("No Company");
+		abhan.setCompany("Dukan");
 		designationList.add(abhan);
 
 		abhan = new Abhan();
-		abhan.setName("Vandit");
+		abhan.setName("B");
 		abhan.setAge(26);
 		abhan.setDesignation("Android Developer");
 		abhan.setCompany("Godown");
 		designationList.add(abhan);
 
 		abhan = new Abhan();
-		abhan.setName("Hardik");
+		abhan.setName("C");
 		abhan.setAge(27);
 		abhan.setDesignation("Web Developer");
-		abhan.setCompany("Nescent");
+		abhan.setCompany("Company");
 		designationList.add(abhan);
 
 		abhan = new Abhan();
-		abhan.setName("Ketan");
+		abhan.setName("D");
 		abhan.setAge(28);
 		abhan.setDesignation("Software Developer");
-		abhan.setCompany("VCS");
+		abhan.setCompany("Company");
 		designationList.add(abhan);
 	}
 
