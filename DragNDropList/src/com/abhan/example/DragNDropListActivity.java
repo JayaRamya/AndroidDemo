@@ -1,7 +1,6 @@
 package com.abhan.example;
 
 import java.util.ArrayList;
-
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,7 +33,8 @@ public class DragNDropListActivity extends ListActivity {
 		}
 	}
 
-	private DropListener mDropListener = new DropListener() {
+	private final DropListener mDropListener = new DropListener() {
+		@Override
 		public void onDrop(int from, int to) {
 			ListAdapter adapter = getListAdapter();
 			if (adapter instanceof DragNDropAdapter) {
@@ -44,7 +44,8 @@ public class DragNDropListActivity extends ListActivity {
 		}
 	};
 
-	private RemoveListener mRemoveListener = new RemoveListener() {
+	private final RemoveListener mRemoveListener = new RemoveListener() {
+		@Override
 		public void onRemove(int which) {
 			ListAdapter adapter = getListAdapter();
 			if (adapter instanceof DragNDropAdapter) {
@@ -54,14 +55,16 @@ public class DragNDropListActivity extends ListActivity {
 		}
 	};
 
-	private DragListener mDragListener = new DragListener() {
+	private final DragListener mDragListener = new DragListener() {
 
 		int backgroundColor = 0xe0103010;
 		int defaultBackgroundColor;
 
+		@Override
 		public void onDrag(int x, int y, ListView listView) {
 		}
 
+		@Override
 		public void onStartDrag(View itemView) {
 			itemView.setVisibility(View.INVISIBLE);
 			defaultBackgroundColor = itemView.getDrawingCacheBackgroundColor();
@@ -72,6 +75,7 @@ public class DragNDropListActivity extends ListActivity {
 				imageView.setVisibility(View.INVISIBLE);
 		}
 
+		@Override
 		public void onStopDrag(View itemView) {
 			itemView.setVisibility(View.VISIBLE);
 			itemView.setBackgroundColor(defaultBackgroundColor);
@@ -83,8 +87,9 @@ public class DragNDropListActivity extends ListActivity {
 
 	};
 
-	private static String[] mListContent = { "Item 1", "Item 2", "Item 3",
-			"Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9",
-			"Item 10", "Item 11", "Item 12", "Item 13", "Item 14", "Item 15",
-			"Item 16", "Item 17", "Item 18", "Item 19", "Item 20", "Item 21" };
+	private static String[] mListContent = { "Abhan 1", "Abhan 2", "Abhan 3",
+			"Abhan 4", "Abhan 5", "Abhan 6", "Abhan 7", "Abhan 8", "Abhan 9",
+			"Abhan 10", "Abhan 11", "Abhan 12", "Abhan 13", "Abhan 14",
+			"Abhan 15", "Abhan 16", "Abhan 17", "Abhan 18", "Abhan 19",
+			"Abhan 20", "Abhan 21" };
 }

@@ -22,7 +22,7 @@ public class StoreAndRetrieveImageFromDatabaseActivity extends Activity {
 		DbHelper = new DBhelper(this);
 
 		Fruit testFruit = new Fruit(BitmapFactory.decodeResource(
-				getResources(), R.drawable.icon), "Icon", 100, 0);
+				getResources(), R.drawable.ic_launcher), "Icon", 100, 0);
 
 		DbHelper.open();
 		DbHelper.createFruitEntry(testFruit);

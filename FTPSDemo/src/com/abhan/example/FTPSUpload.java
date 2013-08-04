@@ -1,22 +1,19 @@
 package com.abhan.example;
 
 import it.sauronsoftware.ftp4j.FTPClient;
-
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
 import android.content.Context;
 
 public class FTPSUpload {
 
-	private Context context;
+	private final Context context;
 	String SFTPHOST = "";// Your Host
-	String SFTPUSER = "";// Username
+	String SFTPUSER = "";// User name
 	String SFTPPASS = "";// Password
 
 	public FTPSUpload(Context context) {
@@ -27,14 +24,17 @@ public class FTPSUpload {
 		boolean isUploaded = false;
 		try {
 			TrustManager[] trustManager = new TrustManager[] { new X509TrustManager() {
+				@Override
 				public X509Certificate[] getAcceptedIssuers() {
 					return null;
 				}
 
+				@Override
 				public void checkClientTrusted(X509Certificate[] certs,
 						String authType) {
 				}
 
+				@Override
 				public void checkServerTrusted(X509Certificate[] certs,
 						String authType) {
 				}

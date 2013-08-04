@@ -1,7 +1,6 @@
 package com.abhan.example;
 
 import java.io.File;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;

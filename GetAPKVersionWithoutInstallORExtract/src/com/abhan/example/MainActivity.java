@@ -3,7 +3,6 @@ package com.abhan.example;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
@@ -31,17 +30,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        downloadManager  = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-    	Uri resourceUri = Uri.parse("YOUR HTTP LINK TO DOWNLOAD APK");
-    	DownloadManager.Request request = new DownloadManager.Request(resourceUri);
-        request.setAllowedNetworkTypes(Request.NETWORK_MOBILE | Request.NETWORK_WIFI);
-        request.setAllowedOverRoaming(false);
-    	enQueue = downloadManager.enqueue(request);
-    	
-    	registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+		downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+		Uri resourceUri = Uri.parse("YOUR HTTP LINK TO DOWNLOAD APK");
+		DownloadManager.Request request = new DownloadManager.Request(resourceUri);
+		request.setAllowedNetworkTypes(Request.NETWORK_MOBILE | Request.NETWORK_WIFI);
+		request.setAllowedOverRoaming(false);
+		enQueue = downloadManager.enqueue(request);
+		
+		registerReceiver(receiver, new IntentFilter(
+				DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
     
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Bundle extras = intent.getExtras();

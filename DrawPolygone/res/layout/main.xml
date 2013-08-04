@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <com.google.android.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:apiKey="0Rg3k7Qii5YXn_dnbRBSCaMbRsk2lXPE4d5Hdtg"
-        android:clickable="true"/>
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/gray" >
+	<TextView
+		android:id="@+id/title"
+		android:layout_width="fill_parent"
+		android:layout_height="50dp"
+		android:layout_gravity="top"
+		android:background="@color/ablue"
+		android:gravity="center"
+		android:text="@string/app_name"
+		android:textColor="@color/white"
+		android:textSize="22dp"
+		android:textStyle="bold" />
+	<com.google.android.maps.MapView
+		android:id="@+id/mapView"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@+id/title"
+		android:apiKey="0Rg3k7Qii5YXn_dnbRBSCaMbRsk2lXPE4d5Hdtg"
+		android:clickable="true" />
 </RelativeLayout>

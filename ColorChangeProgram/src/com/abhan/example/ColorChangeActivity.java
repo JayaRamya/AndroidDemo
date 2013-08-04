@@ -16,7 +16,7 @@ public class ColorChangeActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		mImageView = (ImageView) findViewById(R.id.myimage);
+		mImageView = (ImageView) findViewById(R.id.image);
 
 		mSourceBitmap = BitmapFactory.decodeResource(getResources(),
 				R.drawable.auramental);
