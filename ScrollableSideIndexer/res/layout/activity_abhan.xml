@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@color/gray" >
+	<EditText
+		android:id="@+id/edtSearch"
+		android:layout_width="fill_parent"
+		android:layout_height="40dp"
+		android:layout_alignParentTop="true"
+		android:layout_margin="10dp"
+		android:background="@drawable/edittext_background"
+		android:hint="Enter Search Item"
+		android:padding="3dp"
+		android:singleLine="true"
+		android:textColor="@android:color/black"
+		android:textColorHint="@android:color/darker_gray"
+		android:textSize="15sp" />
+	<com.abhan.example.sideindexers.IndexableListView
+		android:id="@+id/abhanList"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_below="@+id/edtSearch"
+		android:layout_margin="5dp"
+		android:background="@color/white"
+		android:cacheColorHint="@android:color/transparent"
+		android:divider="@android:color/darker_gray"
+		android:dividerHeight="1dp"
+		android:fadingEdge="none"
+		android:listSelector="@android:color/transparent"
+		android:scrollbars="none" />
+</RelativeLayout>
