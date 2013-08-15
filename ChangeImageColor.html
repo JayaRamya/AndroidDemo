@@ -34,7 +34,8 @@
             <p>This project shows how to change <code>Image</code> color programmatically. This technique is based on change <code>HSV</code> value pixel by pixel.</p>
 
             <h3 id="codesnippet">Code Snippet</h3>
-			<p><code>Color.colorToHSV</code> method is used to get current <code>HSV</code> from passing value or by dividing with certain number to get appropriate value. Basically, <code>Color.colorToHSV</code> contains <code>HSV</code> value array which we use to change current pixel's value.</p>
+			<p><code>ColorMatrix</code> is used to change current <code>HSV</code> value. This method counts the next value using 
+current passed value based on <code>Math.sin</code> and <code>Math.cos</code> function. We need to set that <code>ColorMatrix</code> filter to our <code>Bitmap</code>.</p>
 			
 			<p><code>HSV</code> array has 
 			<pre>HSV[0] - Hue (Range From 0 to 360) 
@@ -55,34 +56,45 @@ HSV[2] - Lightness (Range From 0.0 to 1.0)</pre></p>
 		...
 	}
 } </pre>
-			<p>Create one more <code>Bitmap</code> using <code>mSourceBitmap</code> having <code>Config</code> value <code>Bitmap.Config.ARGB_8888</code>.</p>
-			<pre>Bitmap nNewBitmap = nSourceBitmap.copy(Bitmap.Config.ARGB_8888, true);</pre>
-			<p>Now get each pixel from newly created <code>Bitmap</code> and change its value using <code>Color.colorToHSV</code> function.</p>
-			<pre>Bitmap nSourceBitmap = nSource;
-Bitmap nNewBitmap = nSourceBitmap.copy(Bitmap.Config.ARGB_8888, true);
-for (int x = 0; x < nNewBitmap.getWidth(); x++) {
-	for (int y = 0; y < nNewBitmap.getHeight(); y++) {
-		int nNewPixel = hueChange(nNewBitmap.getPixel(x, y), nHue, nSaturation, nLightness);
-		nNewBitmap.setPixel(x, y, nNewPixel);
-	}
-}
-return nNewBitmap;</pre>
-			
-			<pre>private int hueChange(int nStartPixel, int nHue, float nSaturation, float nLightness) {
-	float[] hsv = new float[3];
-	Color.colorToHSV(nStartPixel, hsv);
-	hsv[0] = nHue;
-	// hsv[0] = hsv[0] % 360;
-	hsv[1] = nSaturation;
-	// hsv[1] = hsv[1] % 360;
-	hsv[2] = nLightness;
-	// hsv[2] = hsv[2] % 360;
-	return Color.HSVToColor(Color.alpha(nStartPixel), hsv);
+			<p>Create one more method <code>cleanValue</code> to get min value.</p>
+			<pre>private float cleanValue(float val, float limit) {
+	return Math.min(limit, Math.max(-limit, val));
 }</pre>
-			<p>Set returned <code>Bitmap</code> into your <code>ImageView</code>.</p>
+			
+			<pre>private void adjustHue(ColorMatrix colorMatrix, float value) {
+	value = cleanValue(value, 180f) / 180f * (float) Math.PI;
+	if (value == 0) {
+		return;
+	}
+	float cosVal = (float) Math.cos(value);
+	float sinVal = (float) Math.sin(value);
+	float lumR = 0.213f;
+	float lumG = 0.715f;
+	float lumB = 0.072f;
+	float[] mat = new float[] {
+		lumR + cosVal * (1 - lumR) + sinVal * (-lumR),
+		lumG + cosVal * (-lumG) + sinVal * (-lumG),
+		lumB + cosVal * (-lumB) + sinVal * (1 - lumB), 0, 0,
+		lumR + cosVal * (-lumR) + sinVal * (0.143f),
+		lumG + cosVal * (1 - lumG) + sinVal * (0.140f),
+		lumB + cosVal * (-lumB) + sinVal * (-0.283f), 0, 0,
+		lumR + cosVal * (-lumR) + sinVal * (-(1 - lumR)),
+		lumG + cosVal * (-lumG) + sinVal * (lumG),
+		lumB + cosVal * (1 - lumB) + sinVal * (lumB), 0, 0, 0f, 0f, 0f,
+		1f, 0f, 0f, 0f, 0f, 0f, 1f };
+	colorMatrix.postConcat(new ColorMatrix(mat));
+}</pre>
+
+	<pre>private ColorFilter adjustHue(float value) {
+	ColorMatrix colorMatrix = new ColorMatrix();
+	adjustHue(colorMatrix, value);
+	return new ColorMatrixColorFilter(colorMatrix);
+}</pre>
+
+	<p>To get next or previous color, you can use <code>Left</code> or <code>Right</code> arrow.</p>
 			
 			<h3 id="screenshots">Screen Shots</h3>
-			<p> Coming Soon.</p>
+			<p><img src="images/colorchange.png" alt="ColorChange"/></p>
 			
 			<h3 id="download">Download</h3>
 			<p> Full Source is available from <a href="https://github.com/Abhan/AndroidDemo/tree/master/ColorChangeProgram">Here</a>.</p> 

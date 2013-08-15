@@ -35,40 +35,36 @@
 			<p>As currently, I did not provide support for <code>Event</code> creation but I have included functionality for that.</p>
 
             <h3 id="codesnippet">Code Snippet</h3>
-			<p>Rather than using <code>Background Image</code>, in this project, I tried to use <code>GradientDrawable</code>. In this demo, I have included <code>Red</code>, <code>Blue</code>, <code>Black</code>, <code>Green</code>, and <code>Orange</code> colors for integrated styles.</p>
+			<p>Rather than using <code>Background Image</code>, in this project, I tried to use <code>GradientDrawable</code>. In this demo, I have included <code>abhan</code>, <code>Red</code>, <code>Blue</code>, <code>Black</code>, <code>Green</code>, and <code>Orange</code> colors for integrated styles.</p>
 			<p>First of all create a <code>Activity</code> like as below.</p>
 			<pre> public class CalendarActivity extends Activity {
 	private RelativeLayout parentLayout = null; 
 	private GridView gridView = null;
 	private CalendarAdapter adapter = null;
-	private String themeName = "black";	
+	private String themeName = "abhan";	
 	...
 				
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		themeName = "green";
+		themeName = "abhan";
 		...
 	}
 } </pre>
 			<p>Now set background, arrow images, text color according to set theme as below.</p>
 			<pre>parentBackgroundColor = new GradientDrawable(
-	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFFEEF8F4, 0xFFDCD4B8});
-gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, 
-		new int[] {0xFFE96866, 0xFFBD0400 });
-gradientDrawable.setCornerRadius(0f);
-gradientDrawable.setDither(true);
+	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFFE8E8E8, 0xFFE8E8E8});
 leftArrowDrawable = getResources().getDrawable(R.drawable.left_red);
 rightArrowDrawable = getResources().getDrawable(R.drawable.right_red);
-calendarTitleColor = Color.parseColor("#980000");
+calendarTitleColor = Color.parseColor("#08A3F5");
 sundayColor = Color.parseColor("#E30000");
-restdaysColor = Color.parseColor("#8C3C01");
-parentGridBackgroundColor = Color.parseColor("#EEF8F4");
-currentMonthDateColor = Color.parseColor("#67351D");
-prevNextMonthDateColor = Color.parseColor("#BF8E76");
+restdaysColor = Color.parseColor("#2E393F");
+parentGridBackgroundColor = Color.parseColor("#E8E8E8");
+currentMonthDateColor = Color.parseColor("#2E393F");
+prevNextMonthDateColor = Color.parseColor("#9D9D9D");
 smallCircle = getResources().getDrawable(R.drawable.select_common);
 dateClickedBackgroundColor = new GradientDrawable(
-	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFF753B15, 0xFF2C0D0A});</pre>
+	GradientDrawable.Orientation.TOP_BOTTOM, new int[] {0xFF08A3F5, 0xFF08A3F5});</pre>
 			<p>Now get <code>Calendar</code> instance and set current date, month, and year.</p>
 			<pre>calMonth = Calendar.getInstance();
 calMonth.set(calMonth.get(Calendar.YEAR), calMonth.get(Calendar.MONTH),
@@ -135,7 +131,7 @@ calMonth.set(calMonth.get(Calendar.YEAR), calMonth.get(Calendar.MONTH),
 			<p>To move next or previous month, you can use <code>Left</code> or <code>Right</code> arrow.</p>
 			
 			<h3 id="screenshots">Screen Shots</h3>
-			<p> Coming Soon.</p>
+			<p><img src="images/calendardemo.png" alt="CalendarDemo"/></p>
 			
 			<h3 id="download">Download</h3>
 			<p> Full Source is available from <a href="https://github.com/Abhan/AndroidDemo/tree/master/CalendarDemo">Here</a>.</p> 
